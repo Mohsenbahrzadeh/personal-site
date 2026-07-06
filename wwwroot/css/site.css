@@ -255,6 +255,22 @@ label,.form-label{color:var(--muted2)!important;font-size:12px!important;margin-
 .auth-wrap h1,.auth-wrap h2{font-size:1.5rem;font-weight:800;margin-bottom:24px;letter-spacing:-.01em}
 .auth-wrap ul{padding-inline-start:18px}
 
+/* ── Rich text editor (Admin post body) ── */
+.rte-wrap{background:var(--bg4);border:1px solid var(--border-soft);border-radius:var(--r-sm);overflow:hidden}
+.rte-toolbar{display:flex;flex-wrap:wrap;gap:5px;padding:9px;background:var(--bg3);border-bottom:1px solid var(--border-soft)}
+.rte-btn{
+  background:var(--bg4);border:1px solid var(--border-soft);color:var(--muted2);border-radius:7px;
+  padding:6px 11px;font-size:12px;font-family:inherit;cursor:pointer;transition:.15s;line-height:1;
+}
+.rte-btn:hover{color:var(--text);border-color:rgba(124,155,255,.45);background:rgba(124,155,255,.08)}
+.rte-editor{min-height:240px;padding:16px 18px;font-size:13.5px;line-height:1.85;color:var(--text);outline:none}
+.rte-editor:focus{box-shadow:inset 0 0 0 2px rgba(124,155,255,.15)}
+.rte-editor p{margin:0 0 12px}
+.rte-editor h2,.rte-editor h3{margin:16px 0 10px;color:var(--text)}
+.rte-editor blockquote{border-inline-start:3px solid var(--accent);padding-inline-start:16px;color:var(--muted);margin:12px 0}
+.rte-editor ul,.rte-editor ol{padding-inline-start:24px;margin:0 0 12px}
+.rte-editor a{color:var(--accent)}
+
 /* ── Minimal bootstrap-class shims (Identity RCL pages use these) ── */
 .container{max-width:900px;margin:0 auto;padding:72px 24px}
 .row{display:flex;flex-wrap:wrap;gap:32px}
