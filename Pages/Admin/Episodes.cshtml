@@ -1,0 +1,80 @@
+@page "{postId:int}"
+@model PersonalSite.Pages.Admin.EpisodesModel
+@{
+    ViewData["Title"] = "مدیریت قسمت‌ها — " + Model.Post.Title;
+}
+
+<div class="section-wrap" style="padding-top:48px;max-width:700px">
+    <a asp-page="./Index" class="btn btn-outline btn-sm" style="margin-bottom:24px;display:inline-flex">← بازگشت به مطالب</a>
+
+    <div class="sec-title">قسمت‌های دوره: @Model.Post.Title</div>
+
+    <p class="about-text" style="margin-bottom:24px">
+        مدت کل دوره تا این لحظه: <strong>@Model.Post.TotalDurationFormatted</strong>
+        (@Model.Post.Episodes.Count قسمت)
+    </p>
+
+    @foreach (var ep in Model.Post.Episodes.OrderBy(e => e.Order))
+    {
+        <div class="comment" style="margin-bottom:12px">
+            <div class="comment-head">
+                <span class="comment-author">قسمت @ep.Order — @ep.Title</span>
+                <span>⏱ @ep.DurationFormatted</span>
+            </div>
+            <div class="comment-text" style="margin-bottom:10px">@ep.Description</div>
+            <div style="display:flex;gap:12px;align-items:center">
+                @if (!string.IsNullOrEmpty(ep.VideoFileName))
+                {
+                    <a href="~/videos/@ep.VideoFileName" target="_blank" style="font-size:12px">مشاهده فایل</a>
+                }
+                <form method="post" asp-page-handler="Move" asp-route-postId="@Model.Post.Id" asp-route-episodeId="@ep.Id" asp-route-direction="-1" style="display:inline">
+                    <button type="submit" class="btn-link">▲ بالا</button>
+                </form>
+                <form method="post" asp-page-handler="Move" asp-route-postId="@Model.Post.Id" asp-route-episodeId="@ep.Id" asp-route-direction="1" style="display:inline">
+                    <button type="submit" class="btn-link">▼ پایین</button>
+                </form>
+                <form method="post" asp-page-handler="Delete" asp-route-postId="@Model.Post.Id" asp-route-episodeId="@ep.Id" style="display:inline" onsubmit="return confirm('حذف شود؟');">
+                    <button type="submit" class="btn-link" style="color:var(--danger)">حذف</button>
+                </form>
+            </div>
+        </div>
+    }
+
+    <div class="sec-title" style="margin-top:40px">افزودن قسمت جدید</div>
+
+    <form method="post" asp-page-handler="Add" asp-route-postId="@Model.Post.Id" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+
+        <div class="mb-3">
+            <label asp-for="Input.Title" class="form-label"></label>
+            <input asp-for="Input.Title" class="form-control" style="width:100%" />
+            <span asp-validation-for="Input.Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Input.Description" class="form-label"></label>
+            <textarea asp-for="Input.Description" rows="3" class="form-control" style="width:100%"></textarea>
+            <span asp-validation-for="Input.Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Input.VideoFile" class="form-label"></label>
+            <input asp-for="Input.VideoFile" type="file" accept="video/mp4" class="form-control" style="width:100%" />
+            <span asp-validation-for="Input.VideoFile" class="text-danger"></span>
+            <div style="font-size:11px;color:var(--muted);margin-top:6px">
+                مدت زمان به‌صورت خودکار از فایل mp4 خوانده می‌شود.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Input.ManualDurationSeconds" class="form-label"></label>
+            <input asp-for="Input.ManualDurationSeconds" type="number" min="0" class="form-control" style="width:160px" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">افزودن قسمت</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

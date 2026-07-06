@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] — محسن بحرزاده</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+
+<nav class="site-nav">
+    <a class="nav-brand" asp-area="" asp-page="/Index">محسن بحرزاده</a>
+    <div class="nav-links">
+        <a asp-area="" asp-page="/Index" asp-fragment="courses">دوره‌ها</a>
+        <a asp-area="" asp-page="/Index" asp-fragment="about">درباره من</a>
+        <a asp-area="" asp-page="/Index" asp-fragment="contact">تماس</a>
+        <partial name="_LoginPartial" />
+    </div>
+</nav>
+
+<main>
+    @RenderBody()
+</main>
+
+<footer class="site-footer">
+    <p>© @DateTime.Now.Year محسن بحرزاده — دوره‌های تخصصی معماری نرم‌افزار</p>
+    <div class="footer-links">
+        <a asp-area="" asp-page="/Index" asp-fragment="courses">دوره‌ها</a>
+        <a asp-area="" asp-page="/Index" asp-fragment="about">درباره من</a>
+        <a asp-area="" asp-page="/Index" asp-fragment="contact">تماس</a>
+        <a href="https://github.com/Mohsenbahrzadeh" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/mohsen-bahrzadeh-a43a325b/" target="_blank">LinkedIn</a>
+    </div>
+</footer>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

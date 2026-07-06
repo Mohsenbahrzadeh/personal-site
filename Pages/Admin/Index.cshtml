@@ -1,0 +1,51 @@
+@page
+@model PersonalSite.Pages.Admin.IndexModel
+@{
+    ViewData["Title"] = "پنل مدیریت";
+}
+
+<div class="section-wrap" style="padding-top:48px">
+    <div class="sec-title">مدیریت مطالب</div>
+
+    <div style="margin-bottom:24px;display:flex;gap:12px">
+        <a asp-page="./Edit" class="btn btn-primary btn-sm">+ مطلب جدید</a>
+        <a asp-page="./Comments" class="btn btn-outline btn-sm">مدیریت نظرات</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>عنوان</th>
+                <th>وضعیت</th>
+                <th>نظرات</th>
+                <th>امتیاز</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var post in Model.Posts)
+        {
+            var avg = post.Ratings.Count > 0 ? post.Ratings.Average(r => r.Score) : 0;
+            <tr>
+                <td>@post.Icon @post.Title @(post.Kind == PersonalSite.Data.PostKind.VideoCourse ? "🎬" : "")</td>
+                <td>@(post.Published ? "منتشرشده" : "پیش‌نویس")</td>
+                <td>@post.Comments.Count</td>
+                <td>@(post.Ratings.Count > 0 ? $"★ {avg:0.0} ({post.Ratings.Count})" : "—")</td>
+                <td style="display:flex;gap:8px">
+                    <a asp-page="./Edit" asp-route-id="@post.Id">ویرایش</a>
+                    @if (post.Kind == PersonalSite.Data.PostKind.VideoCourse)
+                    {
+                        <a asp-page="./Episodes" asp-route-postId="@post.Id">قسمت‌ها (@post.Episodes.Count)</a>
+                    }
+                    <form method="post" asp-page-handler="TogglePublish" asp-route-id="@post.Id" style="display:inline">
+                        <button type="submit" class="btn-link">@(post.Published ? "پیش‌نویس کن" : "منتشر کن")</button>
+                    </form>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@post.Id" style="display:inline" onsubmit="return confirm('حذف شود؟');">
+                        <button type="submit" class="btn-link" style="color:var(--danger)">حذف</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

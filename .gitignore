@@ -1,0 +1,16 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+
+# فایل‌های SQLite قدیمی (پروژه الان از SQL Server استفاده می‌کند)
+*.db
+*.db-shm
+*.db-wal
+
+# ویدیوهای آپلودشده توسط ادمین — محتوا هستند نه سورس، نباید commit شوند
+wwwroot/videos/
+
+# رمزهای توسعه (در صورت استفاده از dotnet user-secrets)
+appsettings.*.local.json

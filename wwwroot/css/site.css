@@ -1,0 +1,158 @@
+:root{
+  --bg:#0d1117;--bg2:#161b22;--bg3:#21262d;
+  --border:#30363d;--text:#c9d1d9;--muted:#6e7681;--muted2:#8b949e;
+  --accent:#58a6ff;
+  --danger:#f85149;--success:#3fb950;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{background:var(--bg);color:var(--text)}
+body{font-family:'Vazirmatn',Tahoma,sans-serif;font-size:15px;line-height:1.7;min-height:100%;margin:0}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Nav ── */
+.site-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 48px;border-bottom:1px solid var(--border);background:rgba(13,17,23,.92);backdrop-filter:blur(8px);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:12px}
+.nav-brand{font-weight:800;font-size:15px;color:var(--text)}
+.nav-links{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.nav-links a,.nav-links button{color:var(--muted2);font-size:13px;transition:color .15s;background:none;border:none;font-family:inherit;cursor:pointer;padding:0}
+.nav-links a:hover,.nav-links button:hover{color:var(--text);text-decoration:none}
+
+/* ── Hero ── */
+.hero{padding:96px 48px 80px;max-width:860px;margin:0 auto;text-align:center}
+.hero-avatar{width:88px;height:88px;border-radius:50%;background:var(--bg3);border:2px solid var(--border);margin:0 auto 24px;display:flex;align-items:center;justify-content:center;font-size:2rem;overflow:hidden}
+.hero h1{font-size:2.2rem;font-weight:800;line-height:1.25;margin-bottom:10px}
+.hero h1 span{color:var(--accent)}
+.hero-sub{color:var(--muted2);font-size:15px;max-width:540px;margin:0 auto 16px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:40px}
+.tag{background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--muted2)}
+.hero-cta{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:9px;font-size:13px;font-weight:700;transition:opacity .15s;cursor:pointer;border:1px solid transparent}
+.btn:hover{opacity:.85;text-decoration:none}
+.btn-primary{background:var(--accent);color:#0d1117 !important;border-color:var(--accent)}
+.btn-outline{background:transparent;color:var(--text)!important;border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--muted2)}
+.btn-danger{background:var(--danger);color:#fff!important;border-color:var(--danger)}
+.btn-sm{padding:6px 14px;font-size:12px}
+
+/* ── Sections ── */
+.section-wrap{max-width:1000px;margin:0 auto;padding:0 48px 80px}
+.sec-title{display:flex;align-items:center;gap:12px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:32px}
+.sec-title::after{content:"";flex:1;height:1px;background:var(--border)}
+
+/* ── Posts grid ── */
+.courses-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:80px}
+.course-card{display:block;background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:24px;transition:border-color .2s,transform .15s;text-decoration:none;position:relative;overflow:hidden}
+.course-card:hover{transform:translateY(-2px);text-decoration:none}
+.course-card::before{content:"";position:absolute;top:0;right:0;width:3px;height:100%;border-radius:0 14px 14px 0}
+.course-num{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.course-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.4}
+.course-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:16px}
+.course-tags{display:flex;flex-wrap:wrap;gap:6px}
+.course-tag{font-size:10px;padding:2px 8px;border-radius:10px;background:var(--bg3);color:var(--muted2);border:1px solid var(--border)}
+.course-arrow{position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:18px;opacity:.25;transition:opacity .2s}
+.course-card:hover .course-arrow{opacity:.7}
+.course-rating{font-size:11px;color:#f0a070;margin-bottom:10px}
+
+.c0{border-color:rgba(88,166,255,.2)} .c0:hover{border-color:#58a6ff} .c0::before{background:#58a6ff} .c0 .course-num{color:#58a6ff} .c0 .course-arrow{color:#58a6ff}
+.c1{border-color:rgba(88,166,255,.2)} .c1:hover{border-color:#58a6ff} .c1::before{background:#58a6ff} .c1 .course-num{color:#58a6ff} .c1 .course-arrow{color:#58a6ff}
+.c2{border-color:rgba(63,185,80,.2)} .c2:hover{border-color:#3fb950} .c2::before{background:#3fb950} .c2 .course-num{color:#3fb950} .c2 .course-arrow{color:#3fb950}
+.c3{border-color:rgba(165,214,255,.2)} .c3:hover{border-color:#a5d6ff} .c3::before{background:#a5d6ff} .c3 .course-num{color:#a5d6ff} .c3 .course-arrow{color:#a5d6ff}
+.c4{border-color:rgba(240,160,112,.2)} .c4:hover{border-color:#f0a070} .c4::before{background:#f0a070} .c4 .course-num{color:#f0a070} .c4 .course-arrow{color:#f0a070}
+.c5{border-color:rgba(99,230,190,.2)} .c5:hover{border-color:#63e6be} .c5::before{background:#63e6be} .c5 .course-num{color:#63e6be} .c5 .course-arrow{color:#63e6be}
+.c6{border-color:rgba(167,139,250,.2)} .c6:hover{border-color:#a78bfa} .c6::before{background:#a78bfa} .c6 .course-num{color:#a78bfa} .c6 .course-arrow{color:#a78bfa}
+
+/* ── About / cards ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:80px}
+@media(max-width:640px){.about-grid{grid-template-columns:1fr}}
+.about-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:28px}
+.about-card h3{font-size:14px;font-weight:700;margin-bottom:14px;color:var(--muted2)}
+.about-text{font-size:13px;color:var(--muted);line-height:1.8}
+.about-text p{margin-bottom:10px}
+.about-text p:last-child{margin-bottom:0}
+
+/* ── Contact ── */
+.contact-box{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:32px;max-width:480px}
+.contact-list{display:flex;flex-direction:column;gap:12px}
+.contact-item{display:flex;align-items:center;gap:12px;font-size:13px}
+.contact-icon{width:36px;height:36px;border-radius:9px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.contact-label{color:var(--muted);font-size:11px}
+.contact-value{color:var(--text)}
+.contact-value a{color:var(--text)}
+.contact-value a:hover{color:var(--accent)}
+
+/* ── Footer ── */
+.site-footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.site-footer p{color:var(--muted);font-size:12px;margin:0}
+.footer-links{display:flex;gap:20px}
+.footer-links a{color:var(--muted);font-size:12px}
+.footer-links a:hover{color:var(--text)}
+
+/* ── Post detail ── */
+.post-header{max-width:760px;margin:0 auto;padding:64px 48px 32px}
+.post-header h1{font-size:1.9rem;font-weight:800;margin-bottom:12px}
+.post-meta{color:var(--muted);font-size:12px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.post-body{max-width:760px;margin:0 auto;padding:0 48px 48px;font-size:15px;line-height:1.9}
+.post-body p{margin-bottom:14px}
+
+/* ── Episodes (video courses) ── */
+.episode-list{max-width:760px;margin:0 auto 32px;display:flex;flex-direction:column;gap:10px}
+.episode-item{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:4px 20px}
+.episode-item summary{display:flex;align-items:center;gap:14px;padding:14px 0;cursor:pointer;list-style:none;font-size:13px}
+.episode-item summary::-webkit-details-marker{display:none}
+.episode-num{color:var(--accent);font-weight:700;font-size:11px;flex-shrink:0}
+.episode-title{color:var(--text);font-weight:700;flex:1}
+.episode-duration{color:var(--muted2);font-size:12px;flex-shrink:0}
+.episode-body{padding:0 0 18px}
+.episode-desc{color:var(--muted);font-size:13px;line-height:1.8;margin-bottom:14px}
+.video-badge{font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(240,160,112,.15);color:#f0a070;border:1px solid rgba(240,160,112,.3);font-weight:700}
+
+/* ── Star rating ── */
+.rating-box{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:24px}
+.stars{display:inline-flex;gap:4px;direction:ltr}
+.stars button{background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);padding:0;line-height:1}
+.stars button.active,.stars button:hover{color:#f0a070}
+.rating-summary{font-size:13px;color:var(--muted2);margin-top:8px}
+
+/* ── Comments ── */
+.comments-box{max-width:760px;margin:0 auto;padding:0 48px 80px}
+.comment{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:12px}
+.comment-head{display:flex;justify-content:space-between;font-size:12px;color:var(--muted2);margin-bottom:8px}
+.comment-author{font-weight:700;color:var(--text)}
+.comment-text{font-size:13px;line-height:1.7}
+
+/* ── Forms (own + Identity RCL) ── */
+.form-control,.form-select,input.form-control,textarea.form-control{background:var(--bg3)!important;border:1px solid var(--border)!important;color:var(--text)!important;border-radius:9px!important;padding:10px 14px!important;font-size:13px!important}
+.form-control:focus,.form-select:focus{border-color:var(--accent)!important;box-shadow:0 0 0 3px rgba(88,166,255,.15)!important}
+.form-control::placeholder{color:var(--muted)!important}
+label,.form-label{color:var(--muted2)!important;font-size:12px!important;margin-bottom:6px!important;display:inline-block}
+.form-floating>label{color:var(--muted)!important}
+.text-danger,.validation-summary-errors,.field-validation-error{color:var(--danger)!important;font-size:12px!important}
+.alert{border-radius:10px;padding:14px 18px;font-size:13px;border:1px solid var(--border);background:var(--bg2);color:var(--text)}
+.alert-danger{border-color:rgba(248,81,73,.4);color:var(--danger)}
+.alert-success{border-color:rgba(63,185,80,.4);color:var(--success)}
+.card{background:var(--bg2)!important;border:1px solid var(--border)!important;border-radius:14px!important;color:var(--text)}
+.card-body{padding:28px!important}
+.checkbox label{color:var(--muted2)!important;font-size:12px!important}
+.auth-wrap{max-width:440px;margin:0 auto;padding:64px 24px}
+.auth-wrap h1,.auth-wrap h2{font-size:1.4rem;font-weight:800;margin-bottom:20px}
+.auth-wrap ul{padding-inline-start:18px}
+
+/* ── Minimal bootstrap-class shims (Identity RCL pages use these) ── */
+.container{max-width:900px;margin:0 auto;padding:64px 24px}
+.row{display:flex;flex-wrap:wrap;gap:32px}
+[class*="col-"]{flex:1 1 320px;min-width:0}
+h1,h2,h3,h4{color:var(--text)}
+hr{border:none;border-top:1px solid var(--border);margin:20px 0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+table th,table td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:right}
+.btn-link{background:none;border:none;color:var(--accent);cursor:pointer;font-family:inherit;font-size:13px;padding:0}
+
+@media(max-width:600px){
+  .site-nav{padding:12px 20px}
+  .hero{padding:60px 20px 48px}
+  .section-wrap{padding:0 20px 60px}
+  .post-header,.post-body,.comments-box{padding-inline:20px}
+  .site-footer{padding:24px 20px;flex-direction:column;text-align:center}
+  .courses-grid{grid-template-columns:1fr}
+}

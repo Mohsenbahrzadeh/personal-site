@@ -1,0 +1,43 @@
+@page
+@model PersonalSite.Pages.Admin.CommentsModel
+@{
+    ViewData["Title"] = "مدیریت نظرات";
+}
+
+<div class="section-wrap" style="padding-top:48px">
+    <div class="sec-title">مدیریت نظرات</div>
+    <a asp-page="./Index" class="btn btn-outline btn-sm" style="margin-bottom:24px;display:inline-flex">← بازگشت به مطالب</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>مطلب</th>
+                <th>نویسنده</th>
+                <th>متن</th>
+                <th>تاریخ</th>
+                <th>وضعیت</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var comment in Model.Comments)
+        {
+            <tr>
+                <td>@comment.Post?.Title</td>
+                <td>@(comment.User?.DisplayName is { Length: > 0 } dn ? dn : comment.User?.UserName)</td>
+                <td>@comment.Text</td>
+                <td>@comment.CreatedAt.ToString("yyyy/MM/dd HH:mm")</td>
+                <td>@(comment.Approved ? "تأییدشده" : "پنهان")</td>
+                <td style="display:flex;gap:8px">
+                    <form method="post" asp-page-handler="ToggleApprove" asp-route-id="@comment.Id" style="display:inline">
+                        <button type="submit" class="btn-link">@(comment.Approved ? "پنهان کن" : "تأیید کن")</button>
+                    </form>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@comment.Id" style="display:inline" onsubmit="return confirm('حذف شود؟');">
+                        <button type="submit" class="btn-link" style="color:var(--danger)">حذف</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

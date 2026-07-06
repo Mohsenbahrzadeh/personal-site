@@ -1,0 +1,118 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "محسن بحرزاده — دوره‌های تخصصی معماری نرم‌افزار";
+}
+
+<div class="hero">
+    <div class="hero-avatar">👨‍💻</div>
+    <h1>محسن <span>بحرزاده</span></h1>
+    <p class="hero-sub">معمار نرم‌افزار · مدرس دوره‌های تخصصی معماری میکروسرویس با .NET</p>
+    <div class="hero-tags">
+        <span class="tag">Software Architecture</span>
+        <span class="tag">Event-Driven</span>
+        <span class="tag">Microservices</span>
+        <span class="tag">RabbitMQ &amp; Kafka</span>
+        <span class="tag">OpenTelemetry</span>
+        <span class="tag">ASP.NET Core</span>
+    </div>
+    <div class="hero-cta">
+        <a href="#courses" class="btn btn-primary">مشاهده دوره‌ها ←</a>
+        <a href="#contact" class="btn btn-outline">تماس با من</a>
+    </div>
+</div>
+
+<div class="section-wrap">
+    <div id="courses" class="sec-title">دوره‌های موجود</div>
+
+    <div class="courses-grid">
+        @foreach (var post in Model.Posts)
+        {
+            var accent = post.AccentIndex % 6;
+            var avg = post.Ratings.Count > 0 ? post.Ratings.Average(r => r.Score) : 0;
+            <a href="/Posts/@post.Slug" class="course-card c@(accent)">
+                <div class="course-num">
+                    @post.Icon
+                    @if (post.Kind == PersonalSite.Data.PostKind.VideoCourse)
+                    {
+                        <span class="video-badge">دوره ویدئویی</span>
+                    }
+                </div>
+                <div class="course-title">@post.Title</div>
+                <div class="course-desc">@post.Summary</div>
+                @if (post.Kind == PersonalSite.Data.PostKind.VideoCourse && post.Episodes.Count > 0)
+                {
+                    <div class="course-rating">🎬 @post.Episodes.Count قسمت &nbsp;·&nbsp; ⏱ @post.TotalDurationFormatted</div>
+                }
+                @if (post.Ratings.Count > 0)
+                {
+                    <div class="course-rating">★ @avg.ToString("0.0") &nbsp;(@post.Ratings.Count نظر)</div>
+                }
+                <div class="course-tags">
+                    @foreach (var tag in post.TagList)
+                    {
+                        <span class="course-tag">@tag</span>
+                    }
+                </div>
+                <span class="course-arrow">←</span>
+            </a>
+        }
+    </div>
+
+    <div id="about" class="sec-title">درباره من</div>
+    <div class="about-grid">
+        <div class="about-card">
+            <h3>معرفی</h3>
+            <div class="about-text">
+                <p>معمار نرم‌افزار با تخصص در طراحی سیستم‌های توزیع‌شده و معماری میکروسرویس با .NET.</p>
+                <p>این دوره‌ها را نوشتم چون یادگیری معماری Event-Driven از مستندات پراکنده سخت است. هر دوره از مبانی شروع می‌شود و تا جزئیات production-grade پیش می‌رود.</p>
+                <p>تمرکز اصلی: راه‌حل‌های عملی که در محیط واقعی کار می‌کنند، نه مثال‌های آموزشی ساده‌شده.</p>
+            </div>
+        </div>
+        <div class="about-card">
+            <h3>حوزه‌های تخصصی</h3>
+            <div class="about-text">
+                <p>🏗️ &nbsp;Software Architecture &amp; System Design</p>
+                <p>📨 &nbsp;Event-Driven Architecture / EIP</p>
+                <p>🐇 &nbsp;RabbitMQ, Apache Kafka, MassTransit</p>
+                <p>🔭 &nbsp;Observability — OTel, Prometheus, Grafana</p>
+                <p>🔐 &nbsp;Identity &amp; Access Management</p>
+                <p>🧪 &nbsp;Testing Strategies for Microservices</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact" class="sec-title">راه‌های ارتباطی</div>
+    <div class="contact-box">
+        <div class="contact-list">
+            <div class="contact-item">
+                <div class="contact-icon">📧</div>
+                <div>
+                    <div class="contact-label">ایمیل</div>
+                    <div class="contact-value"><a href="mailto:Mohsen.Bahrzadeh@gmail.com">Mohsen.Bahrzadeh@gmail.com</a></div>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">💼</div>
+                <div>
+                    <div class="contact-label">LinkedIn</div>
+                    <div class="contact-value"><a href="https://www.linkedin.com/in/mohsen-bahrzadeh-a43a325b/" target="_blank">mohsen-bahrzadeh</a></div>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">🐙</div>
+                <div>
+                    <div class="contact-label">GitHub</div>
+                    <div class="contact-value"><a href="https://github.com/Mohsenbahrzadeh" target="_blank">Mohsenbahrzadeh</a></div>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">📱</div>
+                <div>
+                    <div class="contact-label">موبایل / واتساپ</div>
+                    <div class="contact-value"><a href="tel:+989169970721">+989169970721</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

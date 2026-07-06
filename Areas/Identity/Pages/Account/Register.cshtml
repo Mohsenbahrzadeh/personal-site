@@ -1,0 +1,40 @@
+@page
+@model PersonalSite.Areas.Identity.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "ثبت‌نام";
+}
+
+<div class="auth-wrap">
+    <h1>ثبت‌نام</h1>
+    <form method="post">
+        <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+        <div class="mb-3">
+            <label asp-for="Input.DisplayName" class="form-label"></label>
+            <input asp-for="Input.DisplayName" class="form-control" autocomplete="name" />
+            <span asp-validation-for="Input.DisplayName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Input.Email" class="form-label"></label>
+            <input asp-for="Input.Email" class="form-control" autocomplete="email" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Input.Password" class="form-label"></label>
+            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Input.ConfirmPassword" class="form-label"></label>
+            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" />
+            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">ثبت‌نام</button>
+    </form>
+    <p style="margin-top:16px;font-size:13px;color:var(--muted)">
+        قبلاً ثبت‌نام کرده‌اید؟ <a asp-page="./Login">وارد شوید</a>
+    </p>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

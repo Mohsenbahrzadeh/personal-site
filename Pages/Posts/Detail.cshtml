@@ -1,0 +1,105 @@
+@page "/Posts/{slug}"
+@model PersonalSite.Pages.Posts.DetailModel
+@{
+    ViewData["Title"] = Model.Post.Title;
+}
+
+<div class="post-header">
+    <h1>@Model.Post.Icon @Model.Post.Title</h1>
+    <div class="post-meta">
+        <span>@Model.Post.CreatedAt.ToString("yyyy/MM/dd")</span>
+        @if (Model.Post.Ratings.Count > 0)
+        {
+            <span>★ @Model.AverageRating.ToString("0.0") از ۵ &nbsp;(@Model.Post.Ratings.Count رأی)</span>
+        }
+        @if (Model.Post.Kind == PersonalSite.Data.PostKind.VideoCourse)
+        {
+            <span>🎬 @Model.Post.Episodes.Count قسمت &nbsp;·&nbsp; ⏱ @Model.Post.TotalDurationFormatted</span>
+        }
+        @foreach (var tag in Model.Post.TagList)
+        {
+            <span class="course-tag">@tag</span>
+        }
+    </div>
+</div>
+
+<div class="post-body">
+    @Html.Raw(Model.Post.Body)
+</div>
+
+@if (Model.Post.Kind == PersonalSite.Data.PostKind.VideoCourse)
+{
+    <div class="post-body" style="padding-top:0">
+        <div class="sec-title">سرفصل‌های دوره</div>
+        <div class="episode-list">
+            @foreach (var ep in Model.Post.Episodes.OrderBy(e => e.Order))
+            {
+                <details class="episode-item">
+                    <summary>
+                        <span class="episode-num">قسمت @ep.Order</span>
+                        <span class="episode-title">@ep.Title</span>
+                        <span class="episode-duration">⏱ @ep.DurationFormatted</span>
+                    </summary>
+                    <div class="episode-body">
+                        <p class="episode-desc">@ep.Description</p>
+                        @if (!string.IsNullOrEmpty(ep.VideoFileName))
+                        {
+                            <video controls preload="none" style="width:100%;border-radius:10px">
+                                <source src="~/videos/@ep.VideoFileName" type="video/mp4" />
+                            </video>
+                        }
+                    </div>
+                </details>
+            }
+        </div>
+    </div>
+}
+
+<div class="comments-box">
+    <div class="rating-box">
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <form method="post" asp-page-handler="Rate" id="rate-form">
+                <div class="stars" id="star-picker">
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        <button type="submit" name="score" value="@i" class="@(i <= Model.MyRating ? "active" : "")">★</button>
+                    }
+                </div>
+                <div class="rating-summary">
+                    @(Model.MyRating > 0 ? $"امتیاز شما: {Model.MyRating} از ۵ — برای تغییر روی ستاره جدید کلیک کنید" : "به این مطلب امتیاز دهید")
+                </div>
+            </form>
+        }
+        else
+        {
+            <div class="stars">★ ★ ★ ★ ★</div>
+            <div class="rating-summary">برای ثبت امتیاز <a asp-area="Identity" asp-page="/Account/Login">وارد شوید</a></div>
+        }
+    </div>
+
+    <div class="sec-title">نظرات (@Model.Post.Comments.Count)</div>
+
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <form method="post" asp-page-handler="Comment" style="margin-bottom:24px">
+            <textarea class="form-control" name="CommentText" rows="3" placeholder="نظر خود را بنویسید…" required style="width:100%;margin-bottom:10px"></textarea>
+            <button type="submit" class="btn btn-primary btn-sm">ثبت نظر</button>
+        </form>
+    }
+    else
+    {
+        <p class="about-text" style="margin-bottom:24px">برای ثبت نظر <a asp-area="Identity" asp-page="/Account/Login">وارد شوید</a> یا <a asp-area="Identity" asp-page="/Account/Register">ثبت‌نام کنید</a>.</p>
+    }
+
+    @foreach (var comment in Model.Post.Comments.Where(c => c.Approved).OrderByDescending(c => c.CreatedAt))
+    {
+        <div class="comment">
+            <div class="comment-head">
+                <span class="comment-author">@(comment.User?.DisplayName is { Length: > 0 } dn ? dn : comment.User?.UserName)</span>
+                <span>@comment.CreatedAt.ToString("yyyy/MM/dd HH:mm")</span>
+            </div>
+            <div class="comment-text">@comment.Text</div>
+        </div>
+    }
+</div>

@@ -1,0 +1,74 @@
+@page "{id:int?}"
+@model PersonalSite.Pages.Admin.EditModel
+@{
+    ViewData["Title"] = Model.Id is null ? "مطلب جدید" : "ویرایش مطلب";
+}
+
+<div class="section-wrap" style="padding-top:48px;max-width:700px">
+    <div class="sec-title">@ViewData["Title"]</div>
+
+    <form method="post">
+        <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+
+        <div class="mb-3">
+            <label asp-for="Input.Title" class="form-label"></label>
+            <input asp-for="Input.Title" class="form-control" style="width:100%" />
+            <span asp-validation-for="Input.Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Input.Slug" class="form-label"></label>
+            <input asp-for="Input.Slug" class="form-control" style="width:100%;direction:ltr;text-align:left" />
+            <span asp-validation-for="Input.Slug" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Input.Summary" class="form-label"></label>
+            <input asp-for="Input.Summary" class="form-control" style="width:100%" />
+            <span asp-validation-for="Input.Summary" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Input.Kind" class="form-label"></label>
+            <select asp-for="Input.Kind" asp-items="Html.GetEnumSelectList<PersonalSite.Data.PostKind>()" class="form-control" style="width:260px"></select>
+            <div style="font-size:11px;color:var(--muted);margin-top:6px">
+                دوره ویدئویی: بعد از ذخیره به صفحه مدیریت قسمت‌ها منتقل می‌شوید تا ویدیوها را اضافه کنید.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Input.Body" class="form-label">معرفی / متن کامل</label>
+            <textarea asp-for="Input.Body" rows="10" class="form-control" style="width:100%;direction:ltr;text-align:left;font-family:monospace"></textarea>
+            <span asp-validation-for="Input.Body" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Input.Tags" class="form-label"></label>
+            <input asp-for="Input.Tags" class="form-control" style="width:100%" />
+        </div>
+
+        <div class="mb-3" style="display:flex;gap:24px">
+            <div>
+                <label asp-for="Input.Icon" class="form-label"></label>
+                <input asp-for="Input.Icon" class="form-control" style="width:80px" />
+            </div>
+            <div>
+                <label asp-for="Input.AccentIndex" class="form-label"></label>
+                <input asp-for="Input.AccentIndex" type="number" min="0" max="5" class="form-control" style="width:100px" />
+            </div>
+            <div style="align-self:center;margin-top:18px">
+                <label style="display:flex;align-items:center;gap:8px;color:var(--muted2);font-size:12px">
+                    <input asp-for="Input.Published" type="checkbox" style="width:16px;height:16px" />
+                    منتشرشده
+                </label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">ذخیره</button>
+        <a asp-page="./Index" class="btn btn-outline">انصراف</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
